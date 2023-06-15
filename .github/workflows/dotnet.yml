@@ -21,8 +21,11 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore ./tsunami/Tsunami.sln
+      working-directory: ./tsunami
+      run: dotnet restore Tsunami.sln
     - name: Build
+      working-directory: ./tsunami
       run: dotnet build --no-restore
     - name: Test
+      working-directory: ./tsunami
       run: dotnet test --no-build --verbosity normal
