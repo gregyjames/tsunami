@@ -1,4 +1,8 @@
 [![.NET](https://github.com/gregyjames/tsunami/actions/workflows/dotnet.yml/badge.svg)](https://github.com/gregyjames/tsunami/actions/workflows/dotnet.yml)
+![GitHub](https://img.shields.io/github/license/gregyjames/tsunami)
+![GitHub issues](https://img.shields.io/github/issues/gregyjames/tsunami)
+![Nuget](https://img.shields.io/nuget/v/Tsunami)
+![Nuget](https://img.shields.io/nuget/dt/Tsunami)
 
 <table style="border-collapse: collapse; border: none;">
   <tr style="border: none;">
