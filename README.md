@@ -12,3 +12,19 @@
 </table>
 
 A C# wrapper for working with System.Vector for SIMD Intrinsics. 
+
+### Current supported vector operations:
+ - Add
+ - Subtract
+ - Multiply
+ - Min
+ - Max
+
+### Code Example
+
+    var x = Enumerable.Range(0, size).ToList();  
+	var y = Enumerable.Range(0, size).ToList();  
+	var res = Tsunami<int>.DoOperations(x, y, Operations.Add);  
+Please look at the "TsunamiTester" project for more information.
+
+
