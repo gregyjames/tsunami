@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tsunami", "Tsunami\Tsunami.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TsunamiTester", "TsunamiTester\TsunamiTester.csproj", "{BA63C3C7-D8D9-463C-9A27-E88A43875F50}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TsunamiTests", "TsunamiTests\TsunamiTests.csproj", "{7C7E9946-ECAB-40BE-AF17-E945514F9049}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{BA63C3C7-D8D9-463C-9A27-E88A43875F50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA63C3C7-D8D9-463C-9A27-E88A43875F50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA63C3C7-D8D9-463C-9A27-E88A43875F50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C7E9946-ECAB-40BE-AF17-E945514F9049}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C7E9946-ECAB-40BE-AF17-E945514F9049}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C7E9946-ECAB-40BE-AF17-E945514F9049}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C7E9946-ECAB-40BE-AF17-E945514F9049}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
