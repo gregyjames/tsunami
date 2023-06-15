@@ -69,5 +69,5 @@ foreach (var size in sizes)
     table.AddRow(size, sss, ttt, l.SequenceEqual(ll), CalculatePercentageSmaller(Math.Max(elapsed1, elapsed2), Math.Min(elapsed1,elapsed2)));
 }
 
-table.Write(Format.Minimal);
+table.Write(Format.MarkDown);
 

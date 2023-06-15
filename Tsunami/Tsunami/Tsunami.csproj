@@ -6,16 +6,34 @@
         <Nullable>enable</Nullable>
         <Configurations>Release;Debug</Configurations>
         <Platforms>x64</Platforms>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>Tsunami</Title>
+        <Authors>Greg James</Authors>
+        <Description>A high performance C# wrapper for working with System.Vector for SIMD Intrinsics.</Description>
+        <Copyright>2023</Copyright>
+        <PackageIcon>logo-modified.png</PackageIcon>
+        <RepositoryUrl>https://github.com/gregyjames/tsunami</RepositoryUrl>
+        <Company>Greg James</Company>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
       <Optimize>true</Optimize>
       <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
       <DebugSymbols>false</DebugSymbols>
+      <DocumentationFile>bin\x64\Debug\net6.0\Tsunami.xml</DocumentationFile>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
       <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+      <DocumentationFile>bin\x64\Release\net6.0\Tsunami.xml</DocumentationFile>
     </PropertyGroup>
+
+    <ItemGroup>
+      <None Include="..\..\img\logo-modified.png">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+        <Link>logo-modified.png</Link>
+      </None>
+    </ItemGroup>
 
 </Project>
