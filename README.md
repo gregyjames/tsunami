@@ -1,3 +1,5 @@
+[![.NET](https://github.com/gregyjames/tsunami/actions/workflows/dotnet.yml/badge.svg)](https://github.com/gregyjames/tsunami/actions/workflows/dotnet.yml)
+
 <table style="border-collapse: collapse; border: none;">
   <tr style="border: none;">
     <td style="border: none;">
