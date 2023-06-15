@@ -22,16 +22,6 @@ static IEnumerable<int> AddLists(List<int> list1, List<int> list2)
     return ret;
 }
 
-
-void prettyPrint(IEnumerable<int> source)
-{
-    Console.Write("\n");
-    foreach (var e in source)
-    {
-        Console.Write(e + " -> ");
-    }
-}
-
 var sizes = new[] {
     10_000,
     100_000,

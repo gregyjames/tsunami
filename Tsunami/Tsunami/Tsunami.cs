@@ -20,24 +20,6 @@ public static class Tsunami<T> where T : struct, IComparable
     }
 
     private static readonly ArrayPool<T> _pool = ArrayPool<T>.Shared;
-    private static IEnumerable<T> Vec2List(Vector<T> a)
-    {
-        var count = Vector<T>.Count;
-        var tmp = _pool.Rent(count);
-        try
-        {
-            a.CopyTo(tmp);
-            for (var i = 0; i < count; i++)
-            {
-                yield return tmp[i];
-            }
-        }
-        finally
-        {
-            _pool.Return(tmp);
-        }
-    }
-    
     static int CalculateLCM(int num1, int num2)
     {
         var gcd = CalculateGCD(num1, num2);
@@ -60,7 +42,8 @@ public static class Tsunami<T> where T : struct, IComparable
     public static T[] DoOperations(List<T> one, List<T> two, Operations op)
     {
         var count = Vector<T>.Count;
-        var maxLength = CalculateLCM(Math.Max(one.Count, two.Count),count);
+        var max_array_size = Math.Max(one.Count, two.Count);
+        var maxLength = CalculateLCM(max_array_size,count);
         one.Resize(maxLength);
         two.Resize(maxLength);
         
@@ -79,7 +62,7 @@ public static class Tsunami<T> where T : struct, IComparable
             vectorResult.CopyTo(arrSpan.Slice(i, count));
         }
 
-        return arr;
+        return arr[new Range(0, max_array_size)];
     }
 }
 
