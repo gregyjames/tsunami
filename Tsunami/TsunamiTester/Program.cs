@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using ConsoleTables;
 using Tsunami;
 
@@ -29,11 +29,9 @@ var sizes = new[] {
     10_000_000,
     100_000_000,
     250_000_000,
-    500_000_000
 };
 
 var table = new ConsoleTable("Count", "Tsunami", "Normal", "Equal?", "% Diff");
-Thread.Sleep(5000);
 
 
 foreach (var size in sizes)
@@ -43,7 +41,7 @@ foreach (var size in sizes)
     var watch = new Stopwatch();
     
     watch.Start();
-    var l = Tsunami<int>.DoOperations(x, y, Operations.Add);
+    var l = Tsunami<int>.DoOperation(x, y, Operations.Add);
     watch.Stop();
     var elapsed1 = watch.Elapsed.TotalMilliseconds;
     var sss = ($"{elapsed1} ms");

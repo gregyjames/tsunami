@@ -61,7 +61,7 @@ public class OperatorTests
     public void AddTest()
     {
         var res = DoListOps(x, y, (i, i1) => i + i1);
-        var res2 = Tsunami<int>.DoOperations(x, y, Operations.Add);
+        var res2 = Tsunami<int>.DoOperation(x, y, Operations.Add);
         
         prettyPrint(res);
         prettyPrint(res2);
@@ -72,7 +72,7 @@ public class OperatorTests
     public void SubTest()
     {
         var res = DoListOps(x, y, (i, i1) => i - i1);
-        var res2 = Tsunami<int>.DoOperations(x, y, Operations.Subtract);
+        var res2 = Tsunami<int>.DoOperation(x, y, Operations.Subtract);
         prettyPrint(res);
         prettyPrint(res2);
         
@@ -83,7 +83,7 @@ public class OperatorTests
     public void MultTest()
     {
         var res = DoListOps(x, y, (i, i1) => i * i1);
-        var res2 = Tsunami<int>.DoOperations(x, y, Operations.Multiply);
+        var res2 = Tsunami<int>.DoOperation(x, y, Operations.Multiply);
         prettyPrint(res);
         prettyPrint(res2);
         

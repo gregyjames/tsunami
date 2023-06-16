@@ -5,5 +5,11 @@ public enum Operations
     Max,
     Min,
     Multiply,
-    Subtract
+    Subtract,
+    AndNot,
+    BitwiseAnd,
+    BitwiseOr,
+    Divide,
+    Xor,
+    SquareRoot
 }
