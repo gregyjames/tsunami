@@ -15,7 +15,7 @@
   </tr>
 </table>
 
-A High Performance C# wrapper for working with Vector<T> for SIMD Intrinsics. 
+A High Performance C# wrapper that allows you to get the benifts of SIMD Intrinsics on List\<T\>. 
 
 ### What does this do?
 This library is a wrapper for System.Runtime.Intrensics and System.Numerics that allows you do get the performance benifits of SIMD instructions without having to worry about things like memory management, resizing inputs or dealing with the Vector<T> type. 
