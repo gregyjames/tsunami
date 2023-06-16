@@ -18,11 +18,17 @@
 A High Performance C# wrapper for working with System.Vector for SIMD Intrinsics. 
 
 ### Current supported vector operations:
- - Add
- - Subtract
- - Multiply
- - Min
- - Max
+- Add
+- Max
+- Min
+- Multiply
+- Subtract
+- AndNot
+- And
+- Or
+- Divide
+- Xor
+- SquareRoot
 
 ### Benchmarks
 | Count     | Tsunami      | Normal       | Equal? | % Diff             |
@@ -40,6 +46,14 @@ A High Performance C# wrapper for working with System.Vector for SIMD Intrinsics
 	var y = Enumerable.Range(0, size).ToList();  
 	var res = Tsunami<int>.DoOperations(x, y, Operations.Add);  
 Please look at the "TsunamiTester" project for more information.
+
+### Supported Instruction Sets
+- Generic
+- AVX2
+- NEON
+- SSE3
+- SSE41
+- SSE42
 
 ### License
 MIT License
