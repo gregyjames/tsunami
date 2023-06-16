@@ -17,6 +17,9 @@
 
 A High Performance C# wrapper for working with System.Vector for SIMD Intrinsics. 
 
+### What does this do?
+This library is a wrapper for System.Runtime.Intrensics and System.Numerics that allows you do get the performance benifits of SIMD instructions without having to worry about things like memory management, resizing inputs or dealing with the Vector<T> type. 
+
 ### Current supported vector operations:
 - Add
 - Max
