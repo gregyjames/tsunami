@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
 
@@ -5,6 +6,7 @@ namespace Tsunami.Instructions;
 
 public class SSE3
 {
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static Vector128<int> DoVectorOperation_VectorReturn_Sse3(ref Vector128<int> leftVector, ref Vector128<int> rightVector, ref Operations operation)
     {
         return operation switch
@@ -17,7 +19,7 @@ public class SSE3
             _ => throw new ArgumentOutOfRangeException(nameof(operation), operation, null)
         };
     }
-    
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static Vector128<uint> DoVectorOperation_VectorReturn_Sse3(ref Vector128<uint> leftVector, ref Vector128<uint> rightVector, ref Operations operation)
     {
         return operation switch
@@ -30,7 +32,7 @@ public class SSE3
             _ => throw new ArgumentOutOfRangeException(nameof(operation), operation, null)
         };
     }
-    
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static Vector128<float> DoVectorOperation_VectorReturn_Sse3(ref Vector128<float> leftVector, ref Vector128<float> rightVector, ref Operations operation)
     {
         return operation switch
@@ -47,7 +49,7 @@ public class SSE3
             _ => throw new ArgumentOutOfRangeException(nameof(operation), operation, null)
         };
     }
-    
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static Vector128<double> DoVectorOperation_VectorReturn_Sse3(ref Vector128<double> leftVector, ref Vector128<double> rightVector, ref Operations operation)
     {
         return operation switch

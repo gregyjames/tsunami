@@ -1,9 +1,11 @@
 using System.Numerics;
+using System.Runtime.CompilerServices;
 
 namespace Tsunami.Instructions;
 
 internal static class GENERIC<T> where T : struct
 {
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static Vector<T> DoVectorOperation_VectorReturn_GENERIC(ref Vector<T> leftVector, ref Vector<T> rightVector, Operations operation)
     {
         return rightVector != null
@@ -28,6 +30,7 @@ internal static class GENERIC<T> where T : struct
             };
     }
     
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static Vector<T> DoScalarOperation_VectorReturn_GENERIC(ref T a, ref Vector<T> b, Operations op)
     {
         return op switch

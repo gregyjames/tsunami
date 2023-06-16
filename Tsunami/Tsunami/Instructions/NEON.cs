@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.Arm;
 
@@ -5,6 +6,7 @@ namespace Tsunami.Instructions;
 
 internal static class NEON
 {
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static Vector128<int> DoVectorOperation_VectorReturn_NEON(ref Vector128<int> leftVector, ref Vector128<int> rightVector, ref Operations operation)
     {
         return operation switch
@@ -20,7 +22,7 @@ internal static class NEON
             _ => throw new ArgumentOutOfRangeException(nameof(operation), operation, null)
         };
     }
-    
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static Vector128<float> DoVectorOperation_VectorReturn_NEON(ref Vector128<float> leftVector, ref Vector128<float> rightVector, ref Operations operation)
     {
         return operation switch
@@ -36,7 +38,7 @@ internal static class NEON
             _ => throw new ArgumentOutOfRangeException(nameof(operation), operation, null)
         };
     }
-    
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static Vector128<uint> DoVectorOperation_VectorReturn_NEON(ref Vector128<uint> leftVector, ref Vector128<uint> rightVector, ref Operations operation)
     {
         return operation switch
@@ -52,7 +54,7 @@ internal static class NEON
             _ => throw new ArgumentOutOfRangeException(nameof(operation), operation, null)
         };
     }
-    
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static Vector128<double> DoVectorOperation_VectorReturn_NEON(ref Vector128<double> leftVector, ref Vector128<double> rightVector, ref Operations operation)
     {
         return operation switch
