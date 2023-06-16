@@ -89,4 +89,15 @@ public class OperatorTests
         
         Assert.That(AreEqualContents(res, res2));
     }
+    
+    [Test]
+    public void ScalarMultTest()
+    {
+        var res = y.Select(x => x * 3).Take(10);
+        var res2 = Tsunami<int>.DoOperation(3, y, Operations.MultScalar);
+        prettyPrint(res);
+        prettyPrint(res2);
+        
+        Assert.That(AreEqualContents(res, res2));
+    }
 }

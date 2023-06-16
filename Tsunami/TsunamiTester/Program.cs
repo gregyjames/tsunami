@@ -29,6 +29,7 @@ var sizes = new[] {
     10_000_000,
     100_000_000,
     250_000_000,
+    500_000_000
 };
 
 var table = new ConsoleTable("Count", "Tsunami", "Normal", "Equal?", "% Diff");

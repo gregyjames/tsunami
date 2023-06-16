@@ -4,21 +4,21 @@ namespace Tsunami.Instructions;
 
 internal static class GENERIC<T> where T : struct
 {
-    internal static Vector<T> DoVectorOperation_VectorReturn_GENERIC(Vector<T> leftVector, Vector<T>? rightVector, Operations operation)
+    internal static Vector<T> DoVectorOperation_VectorReturn_GENERIC(ref Vector<T> leftVector, ref Vector<T> rightVector, Operations operation)
     {
-        return rightVector.HasValue
+        return rightVector != null
             ? operation switch
             {
-                Operations.Add => Vector.Add(leftVector, rightVector.Value),
-                Operations.AndNot => Vector.AndNot(leftVector, rightVector.Value),
-                Operations.BitwiseAnd => Vector.BitwiseAnd(leftVector, rightVector.Value),
-                Operations.BitwiseOr => Vector.BitwiseOr(leftVector, rightVector.Value),
-                Operations.Divide => Vector.Divide(leftVector, rightVector.Value),
-                Operations.Max => Vector.Max(leftVector, rightVector.Value),
-                Operations.Min => Vector.Min(leftVector, rightVector.Value),
-                Operations.Multiply => Vector.Multiply(leftVector, rightVector.Value),
-                Operations.Subtract => Vector.Subtract(leftVector, rightVector.Value),
-                Operations.Xor => Vector.Xor(leftVector, rightVector.Value),
+                Operations.Add => Vector.Add(leftVector, rightVector),
+                Operations.AndNot => Vector.AndNot(leftVector, rightVector),
+                Operations.BitwiseAnd => Vector.BitwiseAnd(leftVector, rightVector),
+                Operations.BitwiseOr => Vector.BitwiseOr(leftVector, rightVector),
+                Operations.Divide => Vector.Divide(leftVector, rightVector),
+                Operations.Max => Vector.Max(leftVector, rightVector),
+                Operations.Min => Vector.Min(leftVector, rightVector),
+                Operations.Multiply => Vector.Multiply(leftVector, rightVector),
+                Operations.Subtract => Vector.Subtract(leftVector, rightVector),
+                Operations.Xor => Vector.Xor(leftVector, rightVector),
                 _ => throw new ArgumentOutOfRangeException(nameof(operation), operation, null)
             }
             : operation switch
@@ -26,5 +26,14 @@ internal static class GENERIC<T> where T : struct
                 Operations.SquareRoot => Vector.SquareRoot(leftVector),
                 _ => throw new ArgumentOutOfRangeException(nameof(operation), operation, null)
             };
+    }
+    
+    internal static Vector<T> DoScalarOperation_VectorReturn_GENERIC(ref T a, ref Vector<T> b, Operations op)
+    {
+        return op switch
+        {
+            Operations.MultScalar => Vector.Multiply(a, b),
+            _ => throw new ArgumentOutOfRangeException(nameof(op), op, null)
+        };
     }
 }

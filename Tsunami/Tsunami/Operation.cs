@@ -11,5 +11,6 @@ public enum Operations
     BitwiseOr,
     Divide,
     Xor,
-    SquareRoot
+    SquareRoot,
+    MultScalar
 }

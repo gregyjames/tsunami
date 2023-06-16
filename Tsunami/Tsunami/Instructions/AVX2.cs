@@ -5,7 +5,7 @@ namespace Tsunami.Instructions;
 
 public class AVX2
 {
-    internal static Vector256<int> DoVectorOperation_VectorReturn_AVX2(Vector256<int> leftVector, Vector256<int> rightVector, Operations operation)
+    internal static Vector256<int> DoVectorOperation_VectorReturn_AVX2(ref Vector256<int> leftVector, ref Vector256<int> rightVector, ref Operations operation)
     {
         return operation switch
         {
@@ -20,7 +20,7 @@ public class AVX2
         };
     }
     
-    internal static Vector256<uint> DoVectorOperation_VectorReturn_AVX2(Vector256<uint> leftVector, Vector256<uint> rightVector, Operations operation)
+    internal static Vector256<uint> DoVectorOperation_VectorReturn_AVX2(ref Vector256<uint> leftVector, ref Vector256<uint> rightVector, ref Operations operation)
     {
         return operation switch
         {
@@ -35,7 +35,7 @@ public class AVX2
         };
     }
     
-    internal static Vector256<float> DoVectorOperation_VectorReturn_AVX2(Vector256<float> leftVector, Vector256<float> rightVector, Operations operation)
+    internal static Vector256<float> DoVectorOperation_VectorReturn_AVX2(ref Vector256<float> leftVector, ref Vector256<float> rightVector, ref Operations operation)
     {
         return operation switch
         {
@@ -52,7 +52,7 @@ public class AVX2
         };
     }
     
-    internal static Vector256<double> DoVectorOperation_VectorReturn_AVX2(Vector256<double> leftVector, Vector256<double> rightVector, Operations operation)
+    internal static Vector256<double> DoVectorOperation_VectorReturn_AVX2(ref Vector256<double> leftVector, ref Vector256<double> rightVector, ref  Operations operation)
     {
         return operation switch
         {

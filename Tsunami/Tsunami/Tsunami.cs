@@ -9,17 +9,6 @@ namespace Tsunami;
 public static class Tsunami<T> where T : struct
 {
 	/*
-	private static Vector<T> DoScalarOperation(T a, Vector<T> b, Operations op)
-	{
-		return op switch
-		{
-	        Operations.MultScalar => Vector.Multiply(a, b),
-	        _ => throw new ArgumentOutOfRangeException(nameof(op), op, null)
-		};
-	}
-	*/
-
-	/*
 	public static T[] DoOperations(T one, List<T> rightList, Operations operation)
 	{
 		var count = Vector<T>.Count;
@@ -43,8 +32,9 @@ public static class Tsunami<T> where T : struct
 		return arr[new Range(0, max_array_size)];
 	}
 	*/
-    
-    public static IEnumerable<T> DoOperation(List<T> leftList, List<T> rightList, Operations operation)
+
+	#region Generic
+	public static IEnumerable<T> DoOperation(List<T> leftList, List<T> rightList, Operations operation)
     {
 	    var count = Vector<T>.Count;
 	    var maxArraySize = Math.Max(leftList.Count, rightList.Count);
@@ -55,7 +45,7 @@ public static class Tsunami<T> where T : struct
 	    rightList.Resize(maxLength);
 	    leftList.Resize(maxLength);
 	    
-	    var spanOne = CollectionsMarshal.AsSpan(leftList);
+	    var spanOne = CollectionsMarshal.AsSpan(leftList); 
 	    var spanTwo = CollectionsMarshal.AsSpan(rightList);
 
 	    var arr = new T[maxLength];
@@ -66,13 +56,38 @@ public static class Tsunami<T> where T : struct
         
 	    for(var i = 0; i < inputVectors1.Length; i++)
 	    {
-		    resultVectors[i] = GENERIC<T>.DoVectorOperation_VectorReturn_GENERIC(inputVectors1[i], inputVectors2[i], operation);
+		    resultVectors[i] = GENERIC<T>.DoVectorOperation_VectorReturn_GENERIC(ref inputVectors1[i], ref inputVectors2[i], operation);
 	    }
         
 	    GCSettings.LatencyMode = old_gc;
 	    return arr.ResizeArray(maxArraySize);
     }
-    
+	public static IEnumerable<T> DoOperation(T leftScalar, List<T> rightList, Operations operation)
+	{
+		var count = Vector<T>.Count;
+		var maxArraySize = rightList.Count;
+		var maxLength = Helpers.CalculateLCM(maxArraySize,count);
+		var old_gc = GCSettings.LatencyMode;
+		GCSettings.LatencyMode = GCLatencyMode.SustainedLowLatency;
+	    
+		rightList.Resize(maxLength);
+		var spanTwo = CollectionsMarshal.AsSpan(rightList);
+
+		var arr = new T[maxLength];
+        
+		var resultVectors = MemoryMarshal.Cast<T, Vector<T>>(arr);
+		var inputVectors2 = MemoryMarshal.Cast<T, Vector<T>>(spanTwo);
+        
+		for(var i = 0; i < inputVectors2.Length; i++)
+		{
+			resultVectors[i] = GENERIC<T>.DoScalarOperation_VectorReturn_GENERIC(ref leftScalar, ref inputVectors2[i], operation);
+		}
+        
+		GCSettings.LatencyMode = old_gc;
+		return arr.ResizeArray(maxArraySize);
+	}
+	#endregion
+	
     #region NEON
     public static IEnumerable<int> DoOperation_NEON(List<int> leftList, List<int> rightList, Operations operation)
     {
@@ -97,7 +112,7 @@ public static class Tsunami<T> where T : struct
         
 	    for(var i = 0; i < inputVectors1.Length; i++)
 	    {
-		    resultVectors[i] = NEON.DoVectorOperation_VectorReturn_NEON(inputVectors1[i], inputVectors2[i], operation);
+		    resultVectors[i] = NEON.DoVectorOperation_VectorReturn_NEON(ref inputVectors1[i], ref inputVectors2[i], ref operation);
 	    }
 
 	    GCSettings.LatencyMode = old_gc;
@@ -123,7 +138,7 @@ public static class Tsunami<T> where T : struct
         
 	    for(var i = 0; i < inputVectors1.Length; i++)
 	    {
-		    resultVectors[i] = NEON.DoVectorOperation_VectorReturn_NEON(inputVectors1[i], inputVectors2[i], operation);
+		    resultVectors[i] = NEON.DoVectorOperation_VectorReturn_NEON(ref inputVectors1[i], ref inputVectors2[i], ref operation);
 	    }
 	    
 	    return arr.ResizeArray(maxArraySize);
@@ -148,7 +163,7 @@ public static class Tsunami<T> where T : struct
         
 	    for(var i = 0; i < inputVectors1.Length; i++)
 	    {
-		    resultVectors[i] = NEON.DoVectorOperation_VectorReturn_NEON(inputVectors1[i], inputVectors2[i], operation);
+		    resultVectors[i] = NEON.DoVectorOperation_VectorReturn_NEON(ref inputVectors1[i], ref inputVectors2[i], ref operation);
 	    }
 	    
 	    return arr.ResizeArray(maxArraySize);
@@ -173,7 +188,7 @@ public static class Tsunami<T> where T : struct
         
 	    for(var i = 0; i < inputVectors1.Length; i++)
 	    {
-		    resultVectors[i] = NEON.DoVectorOperation_VectorReturn_NEON(inputVectors1[i], inputVectors2[i], operation);
+		    resultVectors[i] = NEON.DoVectorOperation_VectorReturn_NEON(ref inputVectors1[i], ref inputVectors2[i], ref operation);
 	    }
 	    
 	    return arr.ResizeArray(maxArraySize);
@@ -202,12 +217,11 @@ public static class Tsunami<T> where T : struct
         
 	    for(var i = 0; i < inputVectors1.Length; i++)
 	    {
-		    resultVectors[i] = AVX2.DoVectorOperation_VectorReturn_AVX2(inputVectors1[i], inputVectors2[i], operation);
+		    resultVectors[i] = AVX2.DoVectorOperation_VectorReturn_AVX2(ref inputVectors1[i], ref inputVectors2[i], ref operation);
 	    }
 	    
 	    return arr.ResizeArray(maxArraySize);
     }
-
     public static IEnumerable<int> DoOperation_AVX2(List<int> leftList, List<int> rightList, Operations operation)
     {
 	    var count = Vector256<int>.Count;
@@ -228,7 +242,7 @@ public static class Tsunami<T> where T : struct
         
 	    for(var i = 0; i < inputVectors1.Length; i++)
 	    {
-		    resultVectors[i] = AVX2.DoVectorOperation_VectorReturn_AVX2(inputVectors1[i], inputVectors2[i], operation);
+		    resultVectors[i] = AVX2.DoVectorOperation_VectorReturn_AVX2(ref inputVectors1[i], ref inputVectors2[i], ref operation);
 	    }
 	    
 	    return arr.ResizeArray(maxArraySize);
@@ -254,7 +268,7 @@ public static class Tsunami<T> where T : struct
         
 	    for(var i = 0; i < inputVectors1.Length; i++)
 	    {
-		    resultVectors[i] = AVX2.DoVectorOperation_VectorReturn_AVX2(inputVectors1[i], inputVectors2[i], operation);
+		    resultVectors[i] = AVX2.DoVectorOperation_VectorReturn_AVX2(ref inputVectors1[i], ref inputVectors2[i], ref operation);
 	    }
 	    
 	    return arr.ResizeArray(maxArraySize);
@@ -280,7 +294,7 @@ public static class Tsunami<T> where T : struct
         
 	    for(var i = 0; i < inputVectors1.Length; i++)
 	    {
-		    resultVectors[i] = AVX2.DoVectorOperation_VectorReturn_AVX2(inputVectors1[i], inputVectors2[i], operation);
+		    resultVectors[i] = AVX2.DoVectorOperation_VectorReturn_AVX2(ref inputVectors1[i], ref inputVectors2[i], ref operation);
 	    }
 	    
 	    return arr.ResizeArray(maxArraySize);
@@ -309,7 +323,7 @@ public static class Tsunami<T> where T : struct
         
 	    for(var i = 0; i < inputVectors1.Length; i++)
 	    {
-		    resultVectors[i] = SSE3.DoVectorOperation_VectorReturn_Sse3(inputVectors1[i], inputVectors2[i], operation);
+		    resultVectors[i] = SSE3.DoVectorOperation_VectorReturn_Sse3(ref inputVectors1[i], ref inputVectors2[i], ref operation);
 	    }
 	    
 	    return arr.ResizeArray(maxArraySize);
@@ -334,7 +348,7 @@ public static class Tsunami<T> where T : struct
         
 	    for(var i = 0; i < inputVectors1.Length; i++)
 	    {
-		    resultVectors[i] = SSE3.DoVectorOperation_VectorReturn_Sse3(inputVectors1[i], inputVectors2[i], operation);
+		    resultVectors[i] = SSE3.DoVectorOperation_VectorReturn_Sse3(ref inputVectors1[i],ref inputVectors2[i], ref operation);
 	    }
 	    
 	    return arr.ResizeArray(maxArraySize);
@@ -359,7 +373,7 @@ public static class Tsunami<T> where T : struct
         
 	    for(var i = 0; i < inputVectors1.Length; i++)
 	    {
-		    resultVectors[i] = SSE3.DoVectorOperation_VectorReturn_Sse3(inputVectors1[i], inputVectors2[i], operation);
+		    resultVectors[i] = SSE3.DoVectorOperation_VectorReturn_Sse3(ref inputVectors1[i], ref inputVectors2[i], ref operation);
 	    }
 	    
 	    return arr.ResizeArray(maxArraySize);
@@ -384,7 +398,7 @@ public static class Tsunami<T> where T : struct
         
 	    for(var i = 0; i < inputVectors1.Length; i++)
 	    {
-		    resultVectors[i] = SSE3.DoVectorOperation_VectorReturn_Sse3(inputVectors1[i], inputVectors2[i], operation);
+		    resultVectors[i] = SSE3.DoVectorOperation_VectorReturn_Sse3(ref inputVectors1[i], ref inputVectors2[i], ref operation);
 	    }
 	    
 	    return arr.ResizeArray(maxArraySize);
@@ -413,7 +427,7 @@ public static class Tsunami<T> where T : struct
         
 	    for(var i = 0; i < inputVectors1.Length; i++)
 	    {
-		    resultVectors[i] = SSE41.DoVectorOperation_VectorReturn_Sse41(inputVectors1[i], inputVectors2[i], operation);
+		    resultVectors[i] = SSE41.DoVectorOperation_VectorReturn_Sse41(ref inputVectors1[i], ref inputVectors2[i], ref operation);
 	    }
 	    
 	    return arr.ResizeArray(maxArraySize);
@@ -438,7 +452,7 @@ public static class Tsunami<T> where T : struct
         
 	    for(var i = 0; i < inputVectors1.Length; i++)
 	    {
-		    resultVectors[i] = SSE41.DoVectorOperation_VectorReturn_Sse41(inputVectors1[i], inputVectors2[i], operation);
+		    resultVectors[i] = SSE41.DoVectorOperation_VectorReturn_Sse41(ref inputVectors1[i], ref inputVectors2[i], ref operation);
 	    }
 	    
 	    return arr.ResizeArray(maxArraySize);
@@ -463,7 +477,7 @@ public static class Tsunami<T> where T : struct
         
 	    for(var i = 0; i < inputVectors1.Length; i++)
 	    {
-		    resultVectors[i] = SSE41.DoVectorOperation_VectorReturn_Sse41(inputVectors1[i], inputVectors2[i], operation);
+		    resultVectors[i] = SSE41.DoVectorOperation_VectorReturn_Sse41(ref inputVectors1[i], ref inputVectors2[i], ref operation);
 	    }
 	    
 	    return arr.ResizeArray(maxArraySize);
@@ -488,7 +502,7 @@ public static class Tsunami<T> where T : struct
         
 	    for(var i = 0; i < inputVectors1.Length; i++)
 	    {
-		    resultVectors[i] = SSE41.DoVectorOperation_VectorReturn_Sse41(inputVectors1[i], inputVectors2[i], operation);
+		    resultVectors[i] = SSE41.DoVectorOperation_VectorReturn_Sse41(ref inputVectors1[i], ref inputVectors2[i], ref operation);
 	    }
 	    
 	    return arr.ResizeArray(maxArraySize);
@@ -517,7 +531,7 @@ public static class Tsunami<T> where T : struct
         
 	    for(var i = 0; i < inputVectors1.Length; i++)
 	    {
-		    resultVectors[i] = SSE42.DoVectorOperation_VectorReturn_Sse42(inputVectors1[i], inputVectors2[i], operation);
+		    resultVectors[i] = SSE42.DoVectorOperation_VectorReturn_Sse42(ref inputVectors1[i], ref inputVectors2[i], ref operation);
 	    }
 	    
 	    return arr.ResizeArray(maxArraySize);
@@ -542,7 +556,7 @@ public static class Tsunami<T> where T : struct
         
 	    for(var i = 0; i < inputVectors1.Length; i++)
 	    {
-		    resultVectors[i] = SSE42.DoVectorOperation_VectorReturn_Sse42(inputVectors1[i], inputVectors2[i], operation);
+		    resultVectors[i] = SSE42.DoVectorOperation_VectorReturn_Sse42(ref inputVectors1[i], ref inputVectors2[i], ref operation);
 	    }
 	    
 	    return arr.ResizeArray(maxArraySize);
@@ -567,7 +581,7 @@ public static class Tsunami<T> where T : struct
         
 	    for(var i = 0; i < inputVectors1.Length; i++)
 	    {
-		    resultVectors[i] = SSE42.DoVectorOperation_VectorReturn_Sse42(inputVectors1[i], inputVectors2[i], operation);
+		    resultVectors[i] = SSE42.DoVectorOperation_VectorReturn_Sse42(ref inputVectors1[i], ref inputVectors2[i], ref operation);
 	    }
 	    
 	    return arr.ResizeArray(maxArraySize);
@@ -592,7 +606,7 @@ public static class Tsunami<T> where T : struct
         
 	    for(var i = 0; i < inputVectors1.Length; i++)
 	    {
-		    resultVectors[i] = SSE42.DoVectorOperation_VectorReturn_Sse42(inputVectors1[i], inputVectors2[i], operation);
+		    resultVectors[i] = SSE42.DoVectorOperation_VectorReturn_Sse42(ref inputVectors1[i], ref inputVectors2[i], ref operation);
 	    }
 	    
 	    return arr.ResizeArray(maxArraySize);

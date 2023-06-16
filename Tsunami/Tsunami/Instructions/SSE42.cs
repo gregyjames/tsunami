@@ -5,7 +5,7 @@ namespace Tsunami.Instructions;
 
 public class SSE42
 {
-    internal static Vector128<int> DoVectorOperation_VectorReturn_Sse42(Vector128<int> leftVector, Vector128<int> rightVector, Operations operation)
+    internal static Vector128<int> DoVectorOperation_VectorReturn_Sse42(ref Vector128<int> leftVector, ref Vector128<int> rightVector, ref Operations operation)
     {
         return operation switch
         {
@@ -18,7 +18,7 @@ public class SSE42
         };
     }
     
-    internal static Vector128<uint> DoVectorOperation_VectorReturn_Sse42(Vector128<uint> leftVector, Vector128<uint> rightVector, Operations operation)
+    internal static Vector128<uint> DoVectorOperation_VectorReturn_Sse42(ref Vector128<uint> leftVector, ref Vector128<uint> rightVector, ref Operations operation)
     {
         return operation switch
         {
@@ -31,7 +31,7 @@ public class SSE42
         };
     }
     
-    internal static Vector128<float> DoVectorOperation_VectorReturn_Sse42(Vector128<float> leftVector, Vector128<float> rightVector, Operations operation)
+    internal static Vector128<float> DoVectorOperation_VectorReturn_Sse42(ref Vector128<float> leftVector, ref Vector128<float> rightVector, ref Operations operation)
     {
         return operation switch
         {
@@ -48,7 +48,7 @@ public class SSE42
         };
     }
     
-    internal static Vector128<double> DoVectorOperation_VectorReturn_Sse42(Vector128<double> leftVector, Vector128<double> rightVector, Operations operation)
+    internal static Vector128<double> DoVectorOperation_VectorReturn_Sse42(ref Vector128<double> leftVector, ref Vector128<double> rightVector, ref Operations operation)
     {
         return operation switch
         {
