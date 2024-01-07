@@ -4,16 +4,9 @@
 ![Nuget](https://img.shields.io/nuget/v/Tsunami)
 ![Nuget](https://img.shields.io/nuget/dt/Tsunami)
 
-<table style="border-collapse: collapse; border: none;">
-  <tr style="border: none;">
-    <td style="border: none;">
-      <img src="./logo-modified.png" width="100"/>
-    </td>
-    <td style="border: none;">
-      <h1><em>tsunami</em></h1>
-    </td>
-  </tr>
-</table>
+
+| ![logo](./logo-small.png) | _tsunami_ |
+| --- | ----------- |
 
 A High Performance C# wrapper that allows you to get the benifts of SIMD Intrinsics on List\<T\>. 
 
