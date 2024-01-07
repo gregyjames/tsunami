@@ -7,7 +7,7 @@
 <table style="border-collapse: collapse; border: none;">
   <tr style="border: none;">
     <td style="border: none;">
-      <img src="./img/logo-modified.png" width="100"/>
+      <img src="./logo-modified.png" width="100"/>
     </td>
     <td style="border: none;">
       <h1><em>tsunami</em></h1>
