@@ -8,14 +8,19 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>Tsunami</Title>
         <Authors>Greg James</Authors>
-        <Description>A high performance C# wrapper for working with System.Vector for SIMD Intrinsics.</Description>
+        <Description>A High Performance C# wrapper that allows you to get the benifts of SIMD Intrinsics on List&lt;T&gt;.</Description>
         <Copyright>2023</Copyright>
         <PackageIcon>logo-modified.png</PackageIcon>
-        <RepositoryUrl>https://github.com/gregyjames/tsunami</RepositoryUrl>
+        <RepositoryUrl>https://github.com/gregyjames/tsunami.git</RepositoryUrl>
         <Company>Greg James</Company>
         <LangVersion>latest</LangVersion>
         <TargetFramework>net6.0</TargetFramework>
         <Version>2.0.0</Version>
+        <PackageProjectUrl>https://github.com/gregyjames/tsunami</PackageProjectUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>simd performance collections intrensics math vector vectorize </PackageTags>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
@@ -31,11 +36,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <None Include="..\..\img\logo-modified.png">
+      <None Include="..\img\logo-modified.png">
         <Pack>True</Pack>
         <PackagePath></PackagePath>
         <Link>logo-modified.png</Link>
       </None>
+        <None Include="..\README.md" Pack="true" PackagePath="\" />
+        <None Include="..\LICENSE.md" Pack="true" PackagePath="\" />
     </ItemGroup>
 
 </Project>
